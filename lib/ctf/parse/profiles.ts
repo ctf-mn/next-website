@@ -49,9 +49,12 @@ export function parseAuthorProfilePage(html: string, fallbackName: string): Auth
   const rows = $("tbody tr")
     .map((_, row) => {
       const cells = $(row).find("td");
-      const challengeLink = cells.eq(0).find("a").first();
-      const categoryLink = cells.eq(1).find("a").first();
-      const eventLink = cells.eq(2).find("a").first();
+      const links = cells.find("a");
+      const challengeLink = links.eq(0);
+      const categoryLink = links.eq(1);
+      const eventLink = links.eq(2);
+      const solvedCell = cells.eq(cells.length - 2);
+      const scoreCell = cells.eq(cells.length - 1);
 
       return {
         title: cleanText(challengeLink.text()),
@@ -60,8 +63,8 @@ export function parseAuthorProfilePage(html: string, fallbackName: string): Auth
         categoryHref: relativePath(categoryLink.attr("href")),
         event: cleanText(eventLink.text()),
         eventHref: relativePath(eventLink.attr("href")),
-        solved: toNumber(cells.eq(3).text()),
-        score: toNumber(cells.eq(4).text()),
+        solved: toNumber(solvedCell.text()),
+        score: toNumber(scoreCell.text()),
       };
     })
     .get()
