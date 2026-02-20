@@ -30,6 +30,19 @@ export type ChallengeListPage = {
   items: ChallengeListItem[];
 };
 
+export type ChallengeListFilters = {
+  category: string;
+  event: string;
+  status: string;
+};
+
+export type ChallengeListApiResponse = {
+  categories: SelectOption[];
+  events: SelectOption[];
+  statuses: SelectOption[];
+  items: ChallengeListItem[];
+};
+
 export type ScoreboardPage = {
   title: string;
   nav: AppNav;
