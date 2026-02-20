@@ -13,6 +13,7 @@ export type ChallengeListItem = {
   authorHref: string;
   solved: number;
   score: number;
+  isSolved?: boolean;
 };
 
 export type SelectOption = {

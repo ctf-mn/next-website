@@ -36,6 +36,12 @@ export function parseChallengeListPage(html: string): ChallengeListPage {
       const cells = $(row).find("td");
       const challengeLink = cells.eq(1).find("a").first();
       const authorLink = cells.eq(3).find("a").first();
+      const rowClass = ($(row).attr("class") ?? "").toLowerCase();
+      const challengeClass = (challengeLink.attr("class") ?? "").toLowerCase();
+      const isSolved =
+        rowClass.includes("bg-green-50") ||
+        rowClass.includes("table-success") ||
+        challengeClass.includes("text-green-600");
 
       return {
         rank: toNumber(cells.eq(0).text()),
@@ -46,6 +52,7 @@ export function parseChallengeListPage(html: string): ChallengeListPage {
         authorHref: relativePath(authorLink.attr("href")),
         solved: toNumber(cells.eq(4).text()),
         score: toNumber(cells.eq(5).text()),
+        isSolved,
       };
     })
     .get()

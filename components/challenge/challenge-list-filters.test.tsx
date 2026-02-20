@@ -45,6 +45,18 @@ const initialData: ChallengeListApiResponse = {
       authorHref: "/author/alice",
       solved: 10,
       score: 100,
+      isSolved: true,
+    },
+    {
+      rank: 2,
+      href: "/challenge/2",
+      title: "Crypto 101",
+      category: "crypto",
+      author: "bob",
+      authorHref: "/author/bob",
+      solved: 5,
+      score: 200,
+      isSolved: false,
     },
   ],
 };
@@ -123,5 +135,22 @@ describe("ChallengeListFilters", () => {
 
     expect(replaceMock).toHaveBeenCalledWith("/challenge/list", { scroll: false });
     expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("shows a solved indicator only for solved challenges", () => {
+    renderWithQuery(
+      <ChallengeListFilters
+        initialData={initialData}
+        initialFilters={{ category: "all", event: "all", status: "all" }}
+      />,
+    );
+
+    const warmupRow = screen.getByRole("link", { name: "Warmup" }).closest("tr");
+    const cryptoRow = screen.getByRole("link", { name: "Crypto 101" }).closest("tr");
+
+    expect(warmupRow).toBeTruthy();
+    expect(cryptoRow).toBeTruthy();
+    expect(warmupRow?.textContent).toContain("Solved");
+    expect(cryptoRow?.textContent).not.toContain("Solved");
   });
 });

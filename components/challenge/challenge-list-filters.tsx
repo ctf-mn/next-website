@@ -225,9 +225,19 @@ function ChallengeListFiltersContent({ initialData, initialFilters }: Props) {
                 <TableRow key={item.rank}>
                   <TableCell className="text-muted-foreground">{item.rank}</TableCell>
                   <TableCell>
-                    <Link href={item.href} className="font-medium text-foreground hover:underline">
-                      {item.title}
-                    </Link>
+                    <div className="flex items-center gap-2">
+                      <Link href={item.href} className="font-medium text-foreground hover:underline">
+                        {item.title}
+                      </Link>
+                      {item.isSolved ? (
+                        <Badge
+                          variant="secondary"
+                          className="border-green-200 bg-green-50 text-green-700"
+                        >
+                          Solved
+                        </Badge>
+                      ) : null}
+                    </div>
                   </TableCell>
                   <TableCell>
                     <Badge variant="secondary">{item.category}</Badge>
