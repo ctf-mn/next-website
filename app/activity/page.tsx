@@ -29,8 +29,11 @@ export default async function ActivityPage() {
             </TableHeader>
             <TableBody>
               {data.rows.map((row, idx) => (
-                <TableRow key={`${row.user}-${row.challenge}-${idx}`} className={row.correct ? "bg-emerald-50" : undefined}>
-                  <TableCell className="text-slate-500">{row.time}</TableCell>
+                <TableRow
+                  key={`${row.user}-${row.challenge}-${idx}`}
+                  className={row.correct ? "bg-emerald-50 dark:bg-emerald-950/30" : undefined}
+                >
+                  <TableCell className="text-muted-foreground">{row.time}</TableCell>
                   <TableCell>
                     <Link href={row.userHref} className="hover:underline">
                       {row.user}

@@ -40,7 +40,7 @@ export default async function UserProfilePage({ params }: Props) {
             <TableBody>
               {data.rows.map((row, idx) => (
                 <TableRow key={`${row.challenge}-${idx}`}>
-                  <TableCell className="text-slate-500">{row.time}</TableCell>
+                  <TableCell className="text-muted-foreground">{row.time}</TableCell>
                   <TableCell>
                     <Link href={row.challengeHref} className="hover:underline">
                       {row.challenge}

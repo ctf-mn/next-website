@@ -41,7 +41,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
               <CardTitle>{data.challengeTitle}</CardTitle>
               <Badge>{data.score} points</Badge>
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
               <Link href={data.categoryHref} className="hover:underline">
                 {data.category}
               </Link>
@@ -58,7 +58,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
             </div>
           </CardHeader>
           <CardContent className="space-y-6">
-            <article className="prose prose-slate max-w-none">
+            <article className="prose prose-sm max-w-none dark:prose-invert sm:prose-base">
               <ReactMarkdown remarkPlugins={[remarkGfm]}>{data.markdown}</ReactMarkdown>
             </article>
 
@@ -95,7 +95,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
               <TableBody>
                 {data.solvedUsers.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={2} className="text-center text-slate-500">
+                    <TableCell colSpan={2} className="text-center text-muted-foreground">
                       No one solved yet.
                     </TableCell>
                   </TableRow>

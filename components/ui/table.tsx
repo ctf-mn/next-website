@@ -19,11 +19,11 @@ function TableBody({ className, ...props }: React.HTMLAttributes<HTMLTableSectio
 }
 
 function TableRow({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) {
-  return <tr className={cn("border-b border-slate-200 transition-colors hover:bg-slate-50", className)} {...props} />;
+  return <tr className={cn("border-b border-border transition-colors hover:bg-muted/70", className)} {...props} />;
 }
 
 function TableHead({ className, ...props }: React.ThHTMLAttributes<HTMLTableCellElement>) {
-  return <th className={cn("h-10 px-3 text-left align-middle font-medium text-slate-500", className)} {...props} />;
+  return <th className={cn("h-10 px-3 text-left align-middle font-medium text-muted-foreground", className)} {...props} />;
 }
 
 function TableCell({ className, ...props }: React.TdHTMLAttributes<HTMLTableCellElement>) {

@@ -36,7 +36,7 @@ export default async function ScoreboardPage({ searchParams }: Props) {
             <TableBody>
               {data.rows.map((row) => (
                 <TableRow key={`${row.rank}-${row.user}`}>
-                  <TableCell className="text-slate-500">{row.rank}</TableCell>
+                  <TableCell className="text-muted-foreground">{row.rank}</TableCell>
                   <TableCell>
                     <Link href={row.userHref} className="font-medium hover:underline">
                       {row.user}

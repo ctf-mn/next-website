@@ -14,7 +14,7 @@ export default async function LoginPage() {
   const data = (await readAuthState("login")) ?? (await getLoginPage());
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-slate-50 to-slate-100 px-4 py-8">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted px-4 py-8">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>Login</CardTitle>
@@ -32,22 +32,22 @@ export default async function LoginPage() {
             <div className="space-y-2">
               <Label htmlFor="name_or_email">Username or email</Label>
               <Input id="name_or_email" name="name_or_email" defaultValue={data.fieldValues.name_or_email ?? ""} required />
-              {data.fieldErrors.name_or_email ? <p className="text-sm text-red-700">{data.fieldErrors.name_or_email}</p> : null}
+              {data.fieldErrors.name_or_email ? <p className="text-sm text-destructive">{data.fieldErrors.name_or_email}</p> : null}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input id="password" name="password" type="password" required />
-              {data.fieldErrors.password ? <p className="text-sm text-red-700">{data.fieldErrors.password}</p> : null}
+              {data.fieldErrors.password ? <p className="text-sm text-destructive">{data.fieldErrors.password}</p> : null}
             </div>
 
             <Button className="w-full" type="submit">
               Login
             </Button>
 
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-muted-foreground">
               Don&apos;t have an account yet?{" "}
-              <Link href="/register" className="font-medium text-slate-900 hover:underline">
+              <Link href="/register" className="font-medium text-foreground hover:underline">
                 Register
               </Link>
             </p>

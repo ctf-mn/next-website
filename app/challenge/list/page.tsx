@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { PageShell } from "@/components/site/page-shell";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NativeSelect } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -28,7 +29,7 @@ export default async function ChallengeListPage({ searchParams }: Props) {
           <CardContent>
             <form className="grid gap-3 md:grid-cols-3" method="get">
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="category">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground" htmlFor="category">
                   Category
                 </label>
                 <NativeSelect id="category" name="category" defaultValue={data.categories.find((o) => o.selected)?.value ?? "all"}>
@@ -40,7 +41,7 @@ export default async function ChallengeListPage({ searchParams }: Props) {
                 </NativeSelect>
               </div>
               <div>
-                <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="event">
+                <label className="mb-2 block text-sm font-medium text-muted-foreground" htmlFor="event">
                   Event
                 </label>
                 <NativeSelect id="event" name="event" defaultValue={data.events.find((o) => o.selected)?.value ?? "all"}>
@@ -53,7 +54,7 @@ export default async function ChallengeListPage({ searchParams }: Props) {
               </div>
               {data.statuses.length > 0 ? (
                 <div>
-                  <label className="mb-2 block text-sm font-medium text-slate-700" htmlFor="status">
+                  <label className="mb-2 block text-sm font-medium text-muted-foreground" htmlFor="status">
                     Status
                   </label>
                   <NativeSelect id="status" name="status" defaultValue={data.statuses.find((o) => o.selected)?.value ?? "all"}>
@@ -66,9 +67,9 @@ export default async function ChallengeListPage({ searchParams }: Props) {
                 </div>
               ) : null}
               <div className="md:col-span-3">
-                <button className="h-10 rounded-md bg-slate-900 px-4 text-sm font-medium text-white hover:bg-slate-700" type="submit">
+                <Button type="submit">
                   Apply filters
-                </button>
+                </Button>
               </div>
             </form>
           </CardContent>
@@ -90,9 +91,9 @@ export default async function ChallengeListPage({ searchParams }: Props) {
               <TableBody>
                 {data.items.map((item) => (
                   <TableRow key={item.rank}>
-                    <TableCell className="text-slate-500">{item.rank}</TableCell>
+                    <TableCell className="text-muted-foreground">{item.rank}</TableCell>
                     <TableCell>
-                      <Link href={item.href} className="font-medium text-slate-900 hover:underline">
+                      <Link href={item.href} className="font-medium text-foreground hover:underline">
                         {item.title}
                       </Link>
                     </TableCell>
@@ -100,7 +101,7 @@ export default async function ChallengeListPage({ searchParams }: Props) {
                       <Badge variant="secondary">{item.category}</Badge>
                     </TableCell>
                     <TableCell>
-                      <Link href={item.authorHref} className="text-slate-700 hover:underline">
+                      <Link href={item.authorHref} className="text-muted-foreground hover:text-foreground hover:underline">
                         {item.author}
                       </Link>
                     </TableCell>
