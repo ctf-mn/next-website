@@ -2,4 +2,5 @@ FROM mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm
 
 RUN corepack enable \
   && corepack prepare pnpm@latest --activate \
-  && npm install -g @openai/codex
+  && npm install -g @openai/codex \
+  && pnpx playwright@latest install --with-deps chromium
