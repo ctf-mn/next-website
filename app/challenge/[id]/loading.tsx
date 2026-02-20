@@ -4,7 +4,7 @@ export default function ChallengeDetailLoading() {
   return (
     <PageLoadingShell>
       <div className="space-y-4">
-        <div className="rounded-lg border bg-card p-6">
+        <div className="rounded-lg border border-border bg-card p-6">
           <div className="mb-3 flex items-center justify-between gap-3">
             <div className="h-7 w-64 rounded skeleton" />
             <div className="h-6 w-24 rounded skeleton" />
@@ -24,7 +24,7 @@ export default function ChallengeDetailLoading() {
           </div>
         </div>
 
-        <div className="rounded-lg border bg-card p-6">
+        <div className="rounded-lg border border-border bg-card p-6">
           <div className="mb-4 h-6 w-40 rounded skeleton" />
           <div className="space-y-3">
             <div className="h-8 rounded skeleton" />
