@@ -1,3 +1,7 @@
 [mcp_servers.shadcn]
 command = "pnpm"
 args = ["dlx", "shadcn@latest", "mcp"]
+
+[mcp_servers.nextjs]
+command = "pnpx"
+args = ["next-devtools-mcp@latest"]
