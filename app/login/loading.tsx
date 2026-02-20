@@ -1,21 +1,5 @@
+import { AuthPageSkeleton } from "@/components/site/page-skeletons";
+
 export default function LoginLoading() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-background to-muted px-4 py-8">
-      <div className="w-full max-w-md rounded-lg border border-border bg-card p-6">
-        <div className="mb-6 h-7 w-24 rounded skeleton" />
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <div className="h-4 w-32 rounded skeleton" />
-            <div className="h-10 rounded skeleton" />
-          </div>
-          <div className="space-y-2">
-            <div className="h-4 w-20 rounded skeleton" />
-            <div className="h-10 rounded skeleton" />
-          </div>
-          <div className="h-10 rounded skeleton" />
-          <div className="h-4 w-48 rounded skeleton" />
-        </div>
-      </div>
-    </div>
-  );
+  return <AuthPageSkeleton titleWidth="w-24" fieldLabelWidths={["w-32", "w-20"]} helperWidth="w-48" />;
 }
