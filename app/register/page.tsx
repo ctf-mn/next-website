@@ -62,6 +62,10 @@ export default async function RegisterPage() {
               <Link href="/login" className="font-medium text-foreground hover:underline">
                 Login
               </Link>
+              {" · "}
+              <Link href="/" className="font-medium text-foreground hover:underline">
+                Home
+              </Link>
             </p>
           </form>
         </CardContent>

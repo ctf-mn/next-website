@@ -50,6 +50,10 @@ export default async function LoginPage() {
               <Link href="/register" className="font-medium text-foreground hover:underline">
                 Register
               </Link>
+              {" · "}
+              <Link href="/" className="font-medium text-foreground hover:underline">
+                Home
+              </Link>
             </p>
           </form>
         </CardContent>
