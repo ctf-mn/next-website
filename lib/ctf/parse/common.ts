@@ -1,18 +1,20 @@
-import { load } from "cheerio";
+import { load, type CheerioAPI } from "cheerio";
 
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
-export function parseDocument(html: string) {
-  return load(html);
+export type HtmlSource = string | CheerioAPI;
+
+export function parseDocument(source: HtmlSource): CheerioAPI {
+  return typeof source === "string" ? load(source) : source;
 }
 
-export function parseTitle(html: string): string {
-  const $ = load(html);
+export function parseTitle(source: HtmlSource): string {
+  const $ = parseDocument(source);
   return toEnglish($("title").text().trim() || "CTF.mn");
 }
 
-export function parseNav(html: string) {
-  const $ = load(html);
+export function parseNav(source: HtmlSource) {
+  const $ = parseDocument(source);
   const links: Array<{ href: string; label: string }> = [];
   $("header a[href]").each((_, element) => {
     const href = normalizeNavHref(relativePath($(element).attr("href")));
@@ -69,7 +71,7 @@ function normalizeNavHref(path: string): string {
   return path;
 }
 
-function extractHeaderUsername($: ReturnType<typeof load>): string | null {
+function extractHeaderUsername($: CheerioAPI): string | null {
   const value = toEnglish($("header span.font-semibold").last().text().trim());
   return value.length > 0 ? value : null;
 }

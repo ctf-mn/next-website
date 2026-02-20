@@ -1,12 +1,27 @@
 import { headers } from "next/headers";
+import type { CheerioAPI } from "cheerio";
 
 import { CTF_BASE_URL } from "@/lib/ctf/constants";
+import { parseHtmlFromStream } from "@/lib/ctf/parse/stream";
 import { getCookieHeader, mergeSetCookieHeaders } from "@/lib/ctf/session";
 
 export type CtfResponse = {
   status: number;
   location: string | null;
   html: string;
+};
+
+export type CtfRawResponse = {
+  status: number;
+  location: string | null;
+  headers: Headers;
+  body: ReadableStream<Uint8Array> | null;
+};
+
+export type CtfParsedResponse = {
+  status: number;
+  location: string | null;
+  document: CheerioAPI;
 };
 
 function toAbsoluteUrl(path: string): string {
@@ -25,7 +40,7 @@ type RequestOptions = {
   persistCookies?: boolean;
 };
 
-async function request(path: string, init: RequestInit = {}, options: RequestOptions = {}): Promise<CtfResponse> {
+async function requestRaw(path: string, init: RequestInit = {}, options: RequestOptions = {}): Promise<CtfRawResponse> {
   const cookieHeader = await getCookieHeader();
   const userAgent = await getForwardedUserAgent();
 
@@ -47,7 +62,36 @@ async function request(path: string, init: RequestInit = {}, options: RequestOpt
   return {
     status: response.status,
     location: response.headers.get("location"),
-    html: await response.text(),
+    headers: response.headers,
+    body: response.body,
+  };
+}
+
+async function request(path: string, init: RequestInit = {}, options: RequestOptions = {}): Promise<CtfResponse> {
+  const response = await requestRaw(path, init, options);
+
+  return {
+    status: response.status,
+    location: response.location,
+    html: response.body ? await new Response(response.body).text() : "",
+  };
+}
+
+function buildFormBody(formData: FormData): URLSearchParams {
+  const body = new URLSearchParams();
+  for (const [key, value] of formData.entries()) {
+    body.append(key, String(value));
+  }
+  return body;
+}
+
+async function requestDocument(path: string, init: RequestInit = {}, options: RequestOptions = {}): Promise<CtfParsedResponse> {
+  const response = await requestRaw(path, init, options);
+
+  return {
+    status: response.status,
+    location: response.location,
+    document: await parseHtmlFromStream(response.body),
   };
 }
 
@@ -55,12 +99,15 @@ export async function ctfGet(path: string, options: RequestOptions = {}) {
   return request(path, { method: "GET" }, options);
 }
 
-export async function ctfPost(path: string, formData: FormData, options: RequestOptions = { persistCookies: true }) {
-  const body = new URLSearchParams();
-  for (const [key, value] of formData.entries()) {
-    body.append(key, String(value));
-  }
+export async function ctfGetDocument(path: string, options: RequestOptions = {}) {
+  return requestDocument(path, { method: "GET" }, options);
+}
 
+export async function ctfGetRaw(path: string, options: RequestOptions = {}) {
+  return requestRaw(path, { method: "GET" }, options);
+}
+
+export async function ctfPost(path: string, formData: FormData, options: RequestOptions = { persistCookies: true }) {
   return request(
     path,
     {
@@ -68,7 +115,35 @@ export async function ctfPost(path: string, formData: FormData, options: Request
       headers: {
         "content-type": "application/x-www-form-urlencoded",
       },
-      body,
+      body: buildFormBody(formData),
+    },
+    options,
+  );
+}
+
+export async function ctfPostDocument(path: string, formData: FormData, options: RequestOptions = { persistCookies: true }) {
+  return requestDocument(
+    path,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: buildFormBody(formData),
+    },
+    options,
+  );
+}
+
+export async function ctfPostRaw(path: string, formData: FormData, options: RequestOptions = { persistCookies: true }) {
+  return requestRaw(
+    path,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      body: buildFormBody(formData),
     },
     options,
   );

@@ -1,11 +1,9 @@
-import { load } from "cheerio";
-
 import type { AuthorProfilePage, UserProfilePage } from "@/lib/ctf/types";
-import { cleanText, parseNav, parseTitle, relativePath, toNumber } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
 
-export function parseUserProfilePage(html: string): UserProfilePage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseUserProfilePage(source: HtmlSource): UserProfilePage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
 
   const heading = cleanText($("h1").first().text());
   const user = heading.replace(/^User:\s*/i, "");
@@ -31,7 +29,7 @@ export function parseUserProfilePage(html: string): UserProfilePage {
     .filter((entry) => entry.challenge.length > 0);
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     user,
     solvedCount: solvedMatch ? toNumber(solvedMatch[1]) : 0,
@@ -40,9 +38,9 @@ export function parseUserProfilePage(html: string): UserProfilePage {
   };
 }
 
-export function parseAuthorProfilePage(html: string, fallbackName: string): AuthorProfilePage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseAuthorProfilePage(source: HtmlSource, fallbackName: string): AuthorProfilePage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
   const heading = cleanText($("h1").first().text());
   const author = heading.replace(/^Author:\s*/i, "") || fallbackName;
 
@@ -71,7 +69,7 @@ export function parseAuthorProfilePage(html: string, fallbackName: string): Auth
     .filter((entry) => entry.title.length > 0);
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     author,
     rows,

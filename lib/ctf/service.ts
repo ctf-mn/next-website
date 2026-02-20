@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { ctfGet } from "@/lib/ctf/client";
+import { ctfGetDocument } from "@/lib/ctf/client";
 import { parseActivityPage } from "@/lib/ctf/parse/activity";
 import { parseAuthPage } from "@/lib/ctf/parse/auth";
 import { parseChallengeDetailPage } from "@/lib/ctf/parse/challenge-detail";
@@ -21,24 +21,24 @@ function ensureOkOrThrow(status: number) {
 export async function getChallengeList(searchParams: URLSearchParams) {
   const query = searchParams.toString();
   const path = query ? `/challenge/list?${query}` : "/challenge/list";
-  const response = await ctfGet(path);
+  const response = await ctfGetDocument(path);
   ensureOkOrThrow(response.status);
-  return parseChallengeListPage(response.html);
+  return parseChallengeListPage(response.document);
 }
 
 export async function getScoreboard(searchParams: URLSearchParams) {
   const query = searchParams.toString();
   const path = query ? `/scoreboard?${query}` : "/scoreboard";
-  const response = await ctfGet(path);
+  const response = await ctfGetDocument(path);
   ensureOkOrThrow(response.status);
-  return parseScoreboardPage(response.html);
+  return parseScoreboardPage(response.document);
 }
 
 export async function getActivity() {
-  const response = await ctfGet("/activity");
+  const response = await ctfGetDocument("/activity");
   ensureOkOrThrow(response.status);
 
-  const page = parseActivityPage(response.html);
+  const page = parseActivityPage(response.document);
   page.rows = page.rows.map((row) => ({
     ...row,
     status: toEnglish(row.status),
@@ -47,34 +47,34 @@ export async function getActivity() {
 }
 
 export async function getChallenge(id: number) {
-  const response = await ctfGet(`/challenge/${id}`);
+  const response = await ctfGetDocument(`/challenge/${id}`);
   ensureOkOrThrow(response.status);
-  return parseChallengeDetailPage(response.html, id);
+  return parseChallengeDetailPage(response.document, id);
 }
 
 export async function getUserProfile(name: string) {
-  const response = await ctfGet(`/user/${encodeURIComponent(name)}`);
+  const response = await ctfGetDocument(`/user/${encodeURIComponent(name)}`);
   ensureOkOrThrow(response.status);
 
-  const page = parseUserProfilePage(response.html);
+  const page = parseUserProfilePage(response.document);
   page.rows = page.rows.map((entry) => ({ ...entry, status: toEnglish(entry.status) }));
   return page;
 }
 
 export async function getAuthorProfile(name: string) {
-  const response = await ctfGet(`/author/${encodeURIComponent(name)}`);
+  const response = await ctfGetDocument(`/author/${encodeURIComponent(name)}`);
   ensureOkOrThrow(response.status);
-  return parseAuthorProfilePage(response.html, name);
+  return parseAuthorProfilePage(response.document, name);
 }
 
 export async function getLoginPage() {
-  const response = await ctfGet("/login");
+  const response = await ctfGetDocument("/login");
   ensureOkOrThrow(response.status);
-  return parseAuthPage(response.html);
+  return parseAuthPage(response.document);
 }
 
 export async function getRegisterPage() {
-  const response = await ctfGet("/register");
+  const response = await ctfGetDocument("/register");
   ensureOkOrThrow(response.status);
-  return parseAuthPage(response.html);
+  return parseAuthPage(response.document);
 }

@@ -1,11 +1,9 @@
-import { load } from "cheerio";
-
 import type { ChallengeListPage } from "@/lib/ctf/types";
-import { cleanText, parseNav, parseTitle, relativePath, toNumber } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
 
-export function parseChallengeListPage(html: string): ChallengeListPage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseChallengeListPage(source: HtmlSource): ChallengeListPage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
 
   const categories = $("#input-category option")
     .map((_, element) => ({
@@ -59,7 +57,7 @@ export function parseChallengeListPage(html: string): ChallengeListPage {
     .filter((entry) => entry.title.length > 0);
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     categories,
     events,

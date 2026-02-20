@@ -1,14 +1,24 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 import { PageShell } from "@/components/site/page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { getActivity } from "@/lib/ctf/service";
+import ActivityLoading from "./loading";
 
 export const revalidate = 15;
 
-export default async function ActivityPage() {
+export default function ActivityPage() {
+  return (
+    <Suspense fallback={<ActivityLoading />}>
+      <ActivityPageContent />
+    </Suspense>
+  );
+}
+
+async function ActivityPageContent() {
   const data = await getActivity();
 
   return (

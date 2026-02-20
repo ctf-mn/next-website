@@ -1,11 +1,9 @@
-import { load } from "cheerio";
-
 import type { ScoreboardPage } from "@/lib/ctf/types";
-import { cleanText, parseNav, parseTitle, relativePath, toNumber } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
 
-export function parseScoreboardPage(html: string): ScoreboardPage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseScoreboardPage(source: HtmlSource): ScoreboardPage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
 
   const rows = $("tbody tr")
     .map((_, row) => {
@@ -40,7 +38,7 @@ export function parseScoreboardPage(html: string): ScoreboardPage {
     .filter((entry): entry is { page: number; href: string; current: boolean } => Boolean(entry));
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     rows,
     pages,

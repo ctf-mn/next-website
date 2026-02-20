@@ -1,12 +1,10 @@
-import { load } from "cheerio";
-
 import type { ChallengeDetailPage, FlashMessage } from "@/lib/ctf/types";
-import { cleanText, parseNav, parseTitle, relativePath, toNumber } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
-export function parseChallengeDetailPage(html: string, id: number): ChallengeDetailPage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseChallengeDetailPage(source: HtmlSource, id: number): ChallengeDetailPage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
 
   const challengeTitle = cleanText($(".text-xl.font-medium").first().text());
   const metaLinks = $(".text-slate-500 a");
@@ -35,8 +33,10 @@ export function parseChallengeDetailPage(html: string, id: number): ChallengeDet
     .get()
     .filter((entry) => entry.user.length > 0);
 
+  const pageText = $.root().text().toLowerCase();
+
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     id,
     challengeTitle,
@@ -51,13 +51,13 @@ export function parseChallengeDetailPage(html: string, id: number): ChallengeDet
     markdown,
     solvedUsers,
     csrfToken,
-    loginRequired: html.includes("Login required"),
-    alreadySolved: html.toLowerCase().includes("already solved"),
+    loginRequired: pageText.includes("login required"),
+    alreadySolved: pageText.includes("already solved"),
   };
 }
 
-export function parseFlashFromChallengeHtml(html: string): FlashMessage | null {
-  const $ = load(html);
+export function parseFlashFromChallengeHtml(source: HtmlSource): FlashMessage | null {
+  const $ = parseDocument(source);
   const alertText = cleanText($("[role='alert']").text());
   if (!alertText) {
     return null;

@@ -1,11 +1,9 @@
-import { load } from "cheerio";
-
 import type { ActivityPage } from "@/lib/ctf/types";
-import { cleanText, parseNav, parseTitle, relativePath } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, type HtmlSource } from "@/lib/ctf/parse/common";
 
-export function parseActivityPage(html: string): ActivityPage {
-  const $ = load(html);
-  const nav = parseNav(html);
+export function parseActivityPage(source: HtmlSource): ActivityPage {
+  const $ = parseDocument(source);
+  const nav = parseNav($);
 
   const rows = $("tbody tr")
     .map((_, row) => {
@@ -28,7 +26,7 @@ export function parseActivityPage(html: string): ActivityPage {
     .filter((entry) => entry.user.length > 0);
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     nav,
     rows,
   };

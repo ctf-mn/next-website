@@ -1,11 +1,9 @@
-import { load } from "cheerio";
-
 import type { AuthPage } from "@/lib/ctf/types";
-import { cleanText, parseTitle } from "@/lib/ctf/parse/common";
+import { cleanText, parseDocument, parseTitle, type HtmlSource } from "@/lib/ctf/parse/common";
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
-export function parseAuthPage(html: string): AuthPage {
-  const $ = load(html);
+export function parseAuthPage(source: HtmlSource): AuthPage {
+  const $ = parseDocument(source);
 
   const fieldErrors: Record<string, string> = {};
   const fieldValues: Record<string, string> = {};
@@ -28,7 +26,7 @@ export function parseAuthPage(html: string): AuthPage {
   const alert = cleanText($("[role='alert'] div").last().text()) || null;
 
   return {
-    title: parseTitle(html),
+    title: parseTitle($),
     csrfToken: $("input[name='_csrf_token']").attr("value") ?? null,
     alert: alert ? toEnglish(alert) : null,
     fieldErrors,
