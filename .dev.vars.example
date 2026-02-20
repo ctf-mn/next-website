@@ -1,0 +1,2 @@
+# Local-only variables for `wrangler dev` / `pnpm preview`
+# Copy to `.dev.vars` and fill in values as needed.
