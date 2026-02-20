@@ -21,7 +21,6 @@ export function ThemeSwitcher() {
   const rootRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<number | null>(null);
   const activeTheme: ThemeOption = theme === "light" || theme === "dark" ? theme : "system";
-  const ActiveIcon = options.find((option) => option.value === activeTheme)?.Icon ?? Laptop;
 
   useEffect(() => {
     if (!open) return;
@@ -89,7 +88,7 @@ export function ThemeSwitcher() {
         onClick={() => setOpen((value) => !value)}
         onFocus={openMenu}
       >
-        <ActiveIcon className="h-4 w-4" aria-hidden />
+        <Moon className="h-4 w-4" aria-hidden />
       </Button>
       {open ? (
         <>
