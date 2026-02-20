@@ -1,0 +1,21 @@
+{
+  "name": "next-ctf-mn",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "runArgs": ["-p", "3000:3000"],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  },
+  "containerEnv": {
+    "PNPM_STORE_PATH": "/workspaces/next-ctf-mn/.pnpm-store",
+    "HOSTNAME": "0.0.0.0"
+  },
+  "postStartCommand": "pnpm install --force"
+}
