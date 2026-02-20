@@ -21,6 +21,8 @@
   --border: #cbd5e1;
   --input: #cbd5e1;
   --ring: #64748b;
+  --skeleton-base: #e2e8f0;
+  --skeleton-highlight: #f8fafc;
 }
 
 .dark {
@@ -43,6 +45,8 @@
   --border: #334155;
   --input: #334155;
   --ring: #94a3b8;
+  --skeleton-base: #1e293b;
+  --skeleton-highlight: #334155;
 }
 
 @theme inline {
@@ -77,4 +81,21 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.skeleton {
+  background-color: var(--skeleton-base);
+  background-image: linear-gradient(90deg, var(--skeleton-base) 0%, var(--skeleton-highlight) 50%, var(--skeleton-base) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s linear infinite;
+}
+
+@keyframes skeleton-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
 }

@@ -5,15 +5,15 @@ export default function UserProfileLoading() {
     <PageLoadingShell>
       <div className="rounded-lg border bg-card p-6">
         <div className="mb-4 flex items-center justify-between gap-3">
-          <div className="h-6 w-52 animate-pulse rounded bg-muted" />
-          <div className="h-6 w-44 animate-pulse rounded bg-muted" />
+          <div className="h-6 w-52 rounded skeleton" />
+          <div className="h-6 w-44 rounded skeleton" />
         </div>
         <div className="space-y-3">
-          <div className="h-8 animate-pulse rounded bg-muted" />
-          <div className="h-8 animate-pulse rounded bg-muted" />
-          <div className="h-8 animate-pulse rounded bg-muted" />
-          <div className="h-8 animate-pulse rounded bg-muted" />
-          <div className="h-8 animate-pulse rounded bg-muted" />
+          <div className="h-8 rounded skeleton" />
+          <div className="h-8 rounded skeleton" />
+          <div className="h-8 rounded skeleton" />
+          <div className="h-8 rounded skeleton" />
+          <div className="h-8 rounded skeleton" />
         </div>
       </div>
     </PageLoadingShell>
