@@ -14,20 +14,24 @@ export function parseTitle(html: string): string {
 export function parseNav(html: string) {
   const $ = load(html);
   const links: Array<{ href: string; label: string }> = [];
-  $("header a.x-link").each((_, element) => {
-    const href = $(element).attr("href") ?? "#";
+  $("header a[href]").each((_, element) => {
+    const href = normalizeNavHref(relativePath($(element).attr("href")));
     const label = toEnglish($(element).text().trim());
     links.push({ href, label });
   });
 
-  const isAuthenticated = !links.some((e) => e.href === "/login");
-  const currentUserLink = links.find((e) => e.href.startsWith("/user/"));
+  const isAuthenticated = !links.some((e) => e.href === "/login" || e.href === "/register");
+  const headerUsername = extractHeaderUsername($);
+  const currentUserLink =
+    links.find((e) => e.href.startsWith("/user/")) ??
+    (isAuthenticated
+      ? links.find((e) => !NON_USER_NAV_PATHS.has(e.href) && e.label.length > 0)
+      : undefined);
   const currentUser = currentUserLink
-    ? {
-        name: currentUserLink.label,
-        href: relativePath(currentUserLink.href),
-      }
-    : null;
+    ? { name: currentUserLink.label, href: currentUserLink.href }
+    : isAuthenticated && headerUsername
+      ? { name: headerUsername, href: `/user/${encodeURIComponent(headerUsername)}` }
+      : null;
 
   return { links, isAuthenticated, currentUser };
 }
@@ -54,4 +58,18 @@ export function relativePath(input: string | null | undefined): string {
     }
   }
   return input;
+}
+
+const NON_USER_NAV_PATHS = new Set(["/", "/challenge/list", "/scoreboard", "/activity", "/login", "/register", "/logout"]);
+
+function normalizeNavHref(path: string): string {
+  if (path.length > 1 && path.endsWith("/")) {
+    return path.slice(0, -1);
+  }
+  return path;
+}
+
+function extractHeaderUsername($: ReturnType<typeof load>): string | null {
+  const value = toEnglish($("header span.font-semibold").last().text().trim());
+  return value.length > 0 ? value : null;
 }

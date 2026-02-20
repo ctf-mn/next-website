@@ -25,6 +25,7 @@ export function AppHeader({ nav }: { nav: AppNav }) {
               {link.label}
             </Link>
           ))}
+          {nav.isAuthenticated && nav.currentUser ? <span className="text-muted-foreground">|</span> : null}
           {nav.isAuthenticated && nav.currentUser ? (
             <Link href={nav.currentUser.href} className="font-medium text-muted-foreground hover:text-foreground">
               {nav.currentUser.name}
