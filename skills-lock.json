@@ -1,6 +1,11 @@
 {
   "version": 1,
   "skills": {
+    "frontend-design": {
+      "source": "vipulgupta2048/codex-skills",
+      "sourceType": "github",
+      "computedHash": "101bfd663829eeff15ec8de2c263fa84654ad9d2177154f5b54544247cc380a4"
+    },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",
