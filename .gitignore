@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/playwright-report
 
 # next.js
 /.next/
@@ -42,4 +43,3 @@ next-env.d.ts
 
 # pnpm
 .pnpm-store
-
