@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Check, Laptop, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -20,17 +20,22 @@ export function ThemeSwitcher() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<number | null>(null);
+  const openRef = useRef(open);
   const activeTheme: ThemeOption = theme === "light" || theme === "dark" ? theme : "system";
 
   useEffect(() => {
-    if (!open) return;
+    openRef.current = open;
+  }, [open]);
 
+  useEffect(() => {
     const onPointerDown = (event: MouseEvent) => {
+      if (!openRef.current) return;
       if (rootRef.current?.contains(event.target as Node)) return;
       setOpen(false);
     };
 
     const onEscape = (event: KeyboardEvent) => {
+      if (!openRef.current) return;
       if (event.key === "Escape") {
         setOpen(false);
       }
@@ -42,7 +47,7 @@ export function ThemeSwitcher() {
       document.removeEventListener("mousedown", onPointerDown);
       document.removeEventListener("keydown", onEscape);
     };
-  }, [open]);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -52,15 +57,15 @@ export function ThemeSwitcher() {
     };
   }, []);
 
-  const openMenu = () => {
+  const openMenu = useCallback(() => {
     if (closeTimerRef.current !== null) {
       window.clearTimeout(closeTimerRef.current);
       closeTimerRef.current = null;
     }
     setOpen(true);
-  };
+  }, []);
 
-  const queueCloseMenu = () => {
+  const queueCloseMenu = useCallback(() => {
     if (closeTimerRef.current !== null) {
       window.clearTimeout(closeTimerRef.current);
     }
@@ -68,7 +73,10 @@ export function ThemeSwitcher() {
       setOpen(false);
       closeTimerRef.current = null;
     }, 140);
-  };
+  }, []);
+  const toggleMenu = useCallback(() => {
+    setOpen((value) => !value);
+  }, []);
 
   return (
     <div
@@ -85,7 +93,7 @@ export function ThemeSwitcher() {
         aria-haspopup="menu"
         aria-expanded={open}
         className="h-9 w-9 p-0"
-        onClick={() => setOpen((value) => !value)}
+        onClick={toggleMenu}
         onFocus={openMenu}
       >
         <Moon className="h-4 w-4" aria-hidden />

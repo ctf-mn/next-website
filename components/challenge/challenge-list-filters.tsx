@@ -1,9 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { ChangeEvent } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -54,6 +55,26 @@ async function fetchChallengeList(filters: ChallengeListFilters, signal: AbortSi
 }
 
 export function ChallengeListFilters({ initialData, initialFilters }: Props) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            retry: 1,
+            refetchOnWindowFocus: false,
+          },
+        },
+      }),
+  );
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ChallengeListFiltersContent initialData={initialData} initialFilters={initialFilters} />
+    </QueryClientProvider>
+  );
+}
+
+function ChallengeListFiltersContent({ initialData, initialFilters }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const normalizedInitialFilters = normalizeFilters(initialFilters);
@@ -93,6 +114,32 @@ export function ChallengeListFilters({ initialData, initialFilters }: Props) {
   });
 
   const data = query.data ?? initialData;
+  const updateFilter = useCallback((key: keyof ChallengeListFilters, value: string) => {
+    setFilters((prev) => {
+      if (prev[key] === value) {
+        return prev;
+      }
+      return { ...prev, [key]: value };
+    });
+  }, []);
+  const handleCategoryChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      updateFilter("category", event.target.value);
+    },
+    [updateFilter],
+  );
+  const handleEventChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      updateFilter("event", event.target.value);
+    },
+    [updateFilter],
+  );
+  const handleStatusChange = useCallback(
+    (event: ChangeEvent<HTMLSelectElement>) => {
+      updateFilter("status", event.target.value);
+    },
+    [updateFilter],
+  );
 
   return (
     <div className="space-y-4">
@@ -110,7 +157,7 @@ export function ChallengeListFilters({ initialData, initialFilters }: Props) {
                 id="category"
                 name="category"
                 value={filters.category}
-                onChange={(event) => setFilters((prev) => ({ ...prev, category: event.target.value }))}
+                onChange={handleCategoryChange}
               >
                 {data.categories.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -127,7 +174,7 @@ export function ChallengeListFilters({ initialData, initialFilters }: Props) {
                 id="event"
                 name="event"
                 value={filters.event}
-                onChange={(event) => setFilters((prev) => ({ ...prev, event: event.target.value }))}
+                onChange={handleEventChange}
               >
                 {data.events.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -145,7 +192,7 @@ export function ChallengeListFilters({ initialData, initialFilters }: Props) {
                   id="status"
                   name="status"
                   value={filters.status}
-                  onChange={(event) => setFilters((prev) => ({ ...prev, status: event.target.value }))}
+                  onChange={handleStatusChange}
                 >
                   {data.statuses.map((option) => (
                     <option key={option.value} value={option.value}>

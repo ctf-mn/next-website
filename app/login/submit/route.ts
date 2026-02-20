@@ -6,8 +6,10 @@ import { ctfGet, ctfPost } from "@/lib/ctf/client";
 import { parseAuthPage } from "@/lib/ctf/parse/auth";
 
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-  const loginGet = await ctfGet("/login", { persistCookies: true });
+  const [formData, loginGet] = await Promise.all([
+    request.formData(),
+    ctfGet("/login", { persistCookies: true }),
+  ]);
   const token = parseAuthPage(loginGet.html).csrfToken;
   if (token) {
     formData.set("_csrf_token", token);
