@@ -69,15 +69,22 @@ export default async function ChallengeDetailPage({ params }: Props) {
                 <AlertDescription>You need to log in to submit a flag.</AlertDescription>
               </Alert>
             ) : null}
+            {data.alreadySolved ? (
+              <Alert variant="info">
+                <AlertDescription>Congratulations! You already solved this challenge.</AlertDescription>
+              </Alert>
+            ) : null}
 
-            <form action={`/challenge/${data.id}/submit`} method="post" className="flex flex-col gap-3 md:flex-row">
-              {data.csrfToken ? <input type="hidden" name="_csrf_token" value={data.csrfToken} /> : null}
-              <input type="hidden" name="action" value="flag" />
-              <Input name="flag" placeholder="Flag" disabled={data.loginRequired || data.alreadySolved} required />
-              <Button type="submit" disabled={data.loginRequired || data.alreadySolved}>
-                Submit Flag
-              </Button>
-            </form>
+            {!data.alreadySolved ? (
+              <form action={`/challenge/${data.id}/submit`} method="post" className="flex flex-col gap-3 md:flex-row">
+                {data.csrfToken ? <input type="hidden" name="_csrf_token" value={data.csrfToken} /> : null}
+                <input type="hidden" name="action" value="flag" />
+                <Input name="flag" placeholder="Flag" disabled={data.loginRequired} required />
+                <Button type="submit" disabled={data.loginRequired}>
+                  Submit Flag
+                </Button>
+              </form>
+            ) : null}
 
             {attachments.length > 0 ? (
               <section className="space-y-3 border-t pt-4">
