@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
+import { ChallengeMarkdown } from "@/components/challenge/challenge-markdown";
 import { FlashAlert } from "@/components/site/flash-alert";
 import { PageShell } from "@/components/site/page-shell";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -61,7 +60,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
           </CardHeader>
           <CardContent className="space-y-6">
             <article className="prose prose-sm max-w-none dark:prose-invert sm:prose-base">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{contentMarkdown}</ReactMarkdown>
+              <ChallengeMarkdown markdown={contentMarkdown} />
             </article>
 
             {data.loginRequired ? (
