@@ -51,6 +51,11 @@ export type ScoreboardPage = {
   pages: Array<{ page: number; href: string; current: boolean }>;
 };
 
+export type ScoreboardApiResponse = {
+  rows: Array<{ rank: number; user: string; userHref: string; solved: number; score: number }>;
+  pages: Array<{ page: number; href: string; current: boolean }>;
+};
+
 export type ActivityPage = {
   title: string;
   nav: AppNav;

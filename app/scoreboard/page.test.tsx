@@ -71,8 +71,8 @@ describe("Scoreboard pagination", () => {
 
     const activeLink = screen.getByRole("link", { name: "2" });
     expect(activeLink.getAttribute("aria-current")).toBe("page");
-    expect(activeLink.querySelector("div")?.className).toContain("ring-2");
-    expect(activeLink.querySelector("div")?.className).toContain("font-bold");
+    expect(activeLink.querySelector("div")?.className).toContain("ring-1");
+    expect(activeLink.querySelector("div")?.className).toContain("font-semibold");
 
     const inactiveLink = screen.getByRole("link", { name: "1" });
     expect(inactiveLink.getAttribute("aria-current")).toBeNull();
