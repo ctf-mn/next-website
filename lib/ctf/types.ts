@@ -1,5 +1,6 @@
 export type AppNav = {
   isAuthenticated: boolean;
+  currentUser: { name: string; href: string } | null;
   links: Array<{ href: string; label: string }>;
 };
 

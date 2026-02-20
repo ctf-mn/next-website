@@ -25,6 +25,11 @@ export function AppHeader({ nav }: { nav: AppNav }) {
               {link.label}
             </Link>
           ))}
+          {nav.isAuthenticated && nav.currentUser ? (
+            <Link href={nav.currentUser.href} className="font-medium text-muted-foreground hover:text-foreground">
+              {nav.currentUser.name}
+            </Link>
+          ) : null}
           {nav.isAuthenticated ? (
             <form action="/logout" method="post">
               <button type="submit" className="font-medium text-muted-foreground hover:text-foreground">

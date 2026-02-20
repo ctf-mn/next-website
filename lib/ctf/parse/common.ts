@@ -21,7 +21,15 @@ export function parseNav(html: string) {
   });
 
   const isAuthenticated = !links.some((e) => e.href === "/login");
-  return { links, isAuthenticated };
+  const currentUserLink = links.find((e) => e.href.startsWith("/user/"));
+  const currentUser = currentUserLink
+    ? {
+        name: currentUserLink.label,
+        href: relativePath(currentUserLink.href),
+      }
+    : null;
+
+  return { links, isAuthenticated, currentUser };
 }
 
 export function cleanText(text: string): string {
