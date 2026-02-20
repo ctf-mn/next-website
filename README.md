@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# next-ctf-mn
 
-## Getting Started
+Next.js 16 app migrated to Cloudflare Workers with `@opennextjs/cloudflare`.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js 20+
+- `pnpm`
+- `wrangler` (installed via dev dependency)
+- Cloudflare account
+
+## Local Development
+
+Run the standard Next.js dev server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cloudflare Preview (Workers Runtime)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Build with OpenNext and preview in Workers locally:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm preview
+```
 
-## Learn More
+## Deploy
 
-To learn more about Next.js, take a look at the following resources:
+Deploy the app to Cloudflare Workers:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm deploy
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Before first deploy, create the configured R2 bucket:
 
-## Deploy on Vercel
+```bash
+pnpm wrangler r2 bucket create next-ctf-mn-cache
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Optional: Cloudflare Env Types
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Generate Worker env typings:
+
+```bash
+pnpm cf-typegen
+```
