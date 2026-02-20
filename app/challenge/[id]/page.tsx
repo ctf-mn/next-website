@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { parseChallengeContent } from "@/lib/ctf/attachments";
 import { readFlash } from "@/lib/ctf/flash";
 import { getChallenge } from "@/lib/ctf/service";
 
@@ -29,6 +30,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
   }
 
   const [data, flash] = await Promise.all([getChallenge(challengeId), readFlash()]);
+  const { attachments, contentMarkdown } = parseChallengeContent(data.markdown);
 
   return (
     <PageShell nav={data.nav}>
@@ -59,7 +61,7 @@ export default async function ChallengeDetailPage({ params }: Props) {
           </CardHeader>
           <CardContent className="space-y-6">
             <article className="prose prose-sm max-w-none dark:prose-invert sm:prose-base">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>{data.markdown}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>{contentMarkdown}</ReactMarkdown>
             </article>
 
             {data.loginRequired ? (
@@ -77,6 +79,31 @@ export default async function ChallengeDetailPage({ params }: Props) {
                 Submit Flag
               </Button>
             </form>
+
+            {attachments.length > 0 ? (
+              <section className="space-y-3 border-t pt-4">
+                <h2 className="text-base font-semibold">Attachments</h2>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {attachments.map((attachment) => {
+                    const external = /^https?:\/\//i.test(attachment.href);
+                    return (
+                      <a
+                        key={attachment.href}
+                        href={attachment.href}
+                        className="group block rounded-lg border bg-card p-4 transition-colors hover:bg-accent hover:text-accent-foreground"
+                        target={external ? "_blank" : undefined}
+                        rel={external ? "noreferrer noopener" : undefined}
+                      >
+                        <p className="text-sm font-medium leading-tight">{attachment.label}</p>
+                        <p className="mt-1 truncate text-xs text-muted-foreground group-hover:text-accent-foreground/80">
+                          {attachment.href}
+                        </p>
+                      </a>
+                    );
+                  })}
+                </div>
+              </section>
+            ) : null}
           </CardContent>
         </Card>
 
