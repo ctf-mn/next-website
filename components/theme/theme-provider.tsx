@@ -8,7 +8,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     <NextThemesProvider
       attribute="class"
       defaultTheme="system"
-      disableTransitionOnChange
       enableSystem
       storageKey="ctfmn-theme"
     >
