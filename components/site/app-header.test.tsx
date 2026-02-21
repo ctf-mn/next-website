@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, within } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -59,5 +59,42 @@ describe("AppHeader", () => {
 
     expect(screen.queryByRole("link", { name: "alice" })).toBeNull();
     expect(screen.queryByRole("button", { name: "Logout" })).toBeNull();
+  });
+
+  it("opens mobile menu with all nav actions", () => {
+    render(<AppHeader nav={makeNav()} />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    const menu = screen.getByRole("dialog", { name: "Menu" });
+    expect(menu).toBeTruthy();
+    expect(within(menu).getByRole("link", { name: "Challenges" })).toBeTruthy();
+    expect(within(menu).getByRole("link", { name: "Scoreboard" })).toBeTruthy();
+    expect(within(menu).getByRole("link", { name: "Activity" })).toBeTruthy();
+    expect(within(menu).getByRole("link", { name: "Login" })).toBeTruthy();
+    expect(within(menu).getByRole("link", { name: "Register" })).toBeTruthy();
+  });
+
+  it("shows profile and logout inside mobile menu for authenticated users", () => {
+    render(
+      <AppHeader
+        nav={makeNav({
+          isAuthenticated: true,
+          currentUser: { name: "alice", href: "/user/alice" },
+          links: [
+            { href: "/challenge/list", label: "Challenges" },
+            { href: "/scoreboard", label: "Scoreboard" },
+            { href: "/activity", label: "Activity" },
+            { href: "/user/alice", label: "alice" },
+          ],
+        })}
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.getByRole("dialog", { name: "Menu" })).toBeTruthy();
+    expect(screen.getAllByRole("link", { name: "alice" }).length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByRole("button", { name: "Logout" }).length).toBeGreaterThanOrEqual(1);
   });
 });
