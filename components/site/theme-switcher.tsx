@@ -19,72 +19,36 @@ export function ThemeSwitcher() {
   const { theme, setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
-  const closeTimerRef = useRef<number | null>(null);
-  const openRef = useRef(open);
   const activeTheme: ThemeOption = theme === "light" || theme === "dark" ? theme : "system";
 
   useEffect(() => {
-    openRef.current = open;
-  }, [open]);
-
-  useEffect(() => {
-    const onPointerDown = (event: MouseEvent) => {
-      if (!openRef.current) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!open) return;
       if (rootRef.current?.contains(event.target as Node)) return;
       setOpen(false);
     };
 
     const onEscape = (event: KeyboardEvent) => {
-      if (!openRef.current) return;
+      if (!open) return;
       if (event.key === "Escape") {
         setOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onEscape);
     return () => {
-      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onEscape);
     };
-  }, []);
+  }, [open]);
 
-  useEffect(() => {
-    return () => {
-      if (closeTimerRef.current !== null) {
-        window.clearTimeout(closeTimerRef.current);
-      }
-    };
-  }, []);
-
-  const openMenu = useCallback(() => {
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
-    setOpen(true);
-  }, []);
-
-  const queueCloseMenu = useCallback(() => {
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-    }
-    closeTimerRef.current = window.setTimeout(() => {
-      setOpen(false);
-      closeTimerRef.current = null;
-    }, 140);
-  }, []);
   const toggleMenu = useCallback(() => {
     setOpen((value) => !value);
   }, []);
 
   return (
-    <div
-      ref={rootRef}
-      className="relative"
-      onPointerEnter={openMenu}
-      onPointerLeave={queueCloseMenu}
-    >
+    <div ref={rootRef} className="relative">
       <Button
         type="button"
         variant="outline"
@@ -94,7 +58,6 @@ export function ThemeSwitcher() {
         aria-expanded={open}
         className="h-9 w-9 p-0"
         onClick={toggleMenu}
-        onFocus={openMenu}
       >
         <Moon className="h-4 w-4" aria-hidden />
       </Button>
