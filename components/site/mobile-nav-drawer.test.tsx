@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitForElementToBeRemoved } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
@@ -17,7 +17,7 @@ vi.mock("@/components/site/theme-switcher", () => ({
 }));
 
 describe("MobileNavDrawer", () => {
-  it("closes when clicking the overlay", () => {
+  it("closes when clicking the overlay", async () => {
     render(
       <MobileNavDrawer
         coreLinks={[
@@ -37,10 +37,10 @@ describe("MobileNavDrawer", () => {
     expect(screen.getByRole("dialog", { name: "Menu" })).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: "Close menu overlay" }));
-    expect(screen.queryByRole("dialog", { name: "Menu" })).toBeNull();
+    await waitForElementToBeRemoved(() => screen.queryByRole("dialog", { name: "Menu" }));
   });
 
-  it("closes when pressing Escape", () => {
+  it("closes when pressing Escape", async () => {
     render(
       <MobileNavDrawer
         coreLinks={[{ href: "/challenge/list", label: "Challenges" }]}
@@ -54,6 +54,6 @@ describe("MobileNavDrawer", () => {
     expect(screen.getByRole("dialog", { name: "Menu" })).toBeTruthy();
 
     fireEvent.keyDown(document, { key: "Escape" });
-    expect(screen.queryByRole("dialog", { name: "Menu" })).toBeNull();
+    await waitForElementToBeRemoved(() => screen.queryByRole("dialog", { name: "Menu" }));
   });
 });
