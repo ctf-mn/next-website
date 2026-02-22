@@ -130,7 +130,6 @@ function ScoreboardTableContent({ initialData, initialPage }: Props) {
                 key={item.value.page}
                 href={item.value.href}
                 aria-current={isActive ? "page" : undefined}
-                aria-label={isActive ? `Current page ${item.value.page}` : `Go to page ${item.value.page}`}
                 onClick={(event) => {
                   event.preventDefault();
                   setPage(item.value.page);
