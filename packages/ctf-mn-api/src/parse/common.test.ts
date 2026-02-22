@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseNav } from "@/lib/ctf/parse/common";
+import { parseNav } from "@ctf-mn/api/parse/common";
 
 describe("parseNav", () => {
   it("captures current user from authenticated header links", () => {

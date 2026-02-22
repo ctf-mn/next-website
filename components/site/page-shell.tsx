@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import type { AppNav } from "@/lib/ctf/types";
+import type { AppNav } from "@ctf-mn/api/types";
 import { AppHeader } from "@/components/site/app-header";
 import { ScrollToTopButton } from "@/components/site/scroll-to-top-button";
 

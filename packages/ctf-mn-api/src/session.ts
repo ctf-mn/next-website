@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import setCookieParser from "set-cookie-parser";
 
-import { UPSTREAM_COOKIE_KEY } from "@/lib/ctf/constants";
+import { UPSTREAM_COOKIE_KEY } from "@ctf-mn/api/constants";
 
 type CookieJar = Record<string, string>;
 

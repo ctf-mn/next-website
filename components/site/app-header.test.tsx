@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import { AppHeader } from "@/components/site/app-header";
-import type { AppNav } from "@/lib/ctf/types";
+import type { AppNav } from "@ctf-mn/api/types";
 
 vi.mock("next/link", () => ({
   default: ({ href, children, ...props }: { href: string; children: ReactNode }) => (

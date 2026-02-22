@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { ctfPostRaw } from "@/lib/ctf/client";
+import { ctfPostRaw } from "@ctf-mn/api/client";
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();

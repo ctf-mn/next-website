@@ -1,7 +1,7 @@
 import { ScoreboardTable } from "@/components/scoreboard/scoreboard-table";
 import { PageShell } from "@/components/site/page-shell";
-import { toUrlSearchParams, type NextSearchParams } from "@/lib/ctf/search";
-import { getScoreboard } from "@/lib/ctf/service";
+import { toUrlSearchParams, type NextSearchParams } from "@ctf-mn/api/search";
+import { getScoreboard } from "@ctf-mn/api/service";
 
 export const revalidate = 60;
 

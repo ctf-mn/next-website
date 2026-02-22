@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { ScoreboardApiResponse } from "@/lib/ctf/types";
-import { getScoreboard } from "@/lib/ctf/service";
+import type { ScoreboardApiResponse } from "@ctf-mn/api/types";
+import { getScoreboard } from "@ctf-mn/api/service";
 
 export async function GET(request: NextRequest) {
   const data = await getScoreboard(request.nextUrl.searchParams);

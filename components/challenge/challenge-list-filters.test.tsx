@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { ChallengeListFilters } from "@/components/challenge/challenge-list-filters";
-import type { ChallengeListApiResponse } from "@/lib/ctf/types";
+import type { ChallengeListApiResponse } from "@ctf-mn/api/types";
 
 const replaceMock = vi.fn();
 const routerMock = { replace: replaceMock };

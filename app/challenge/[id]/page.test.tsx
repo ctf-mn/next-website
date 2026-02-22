@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import ChallengeDetailPage from "./page";
-import { readFlash } from "@/lib/ctf/flash";
-import { getChallenge } from "@/lib/ctf/service";
-import type { ChallengeDetailPage as ChallengeDetailData } from "@/lib/ctf/types";
+import { readFlash } from "@ctf-mn/api/flash";
+import { getChallenge } from "@ctf-mn/api/service";
+import type { ChallengeDetailPage as ChallengeDetailData } from "@ctf-mn/api/types";
 
 vi.mock("next/link", () => ({
   default: ({ href, children, ...props }: { href: string; children: ReactNode }) => (
@@ -27,11 +27,11 @@ vi.mock("@/components/challenge/challenge-markdown", () => ({
   ChallengeMarkdown: ({ markdown }: { markdown: string }) => <div>{markdown}</div>,
 }));
 
-vi.mock("@/lib/ctf/service", () => ({
+vi.mock("@ctf-mn/api/service", () => ({
   getChallenge: vi.fn(),
 }));
 
-vi.mock("@/lib/ctf/flash", () => ({
+vi.mock("@ctf-mn/api/flash", () => ({
   readFlash: vi.fn(),
 }));
 

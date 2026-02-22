@@ -1,5 +1,5 @@
-import type { ActivityPage } from "@/lib/ctf/types";
-import { cleanText, parseDocument, parseNav, parseTitle, relativePath, type HtmlSource } from "@/lib/ctf/parse/common";
+import type { ActivityPage } from "@ctf-mn/api/types";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, type HtmlSource } from "@ctf-mn/api/parse/common";
 
 export function parseActivityPage(source: HtmlSource): ActivityPage {
   const $ = parseDocument(source);

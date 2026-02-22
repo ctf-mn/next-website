@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { MobileNavDrawer } from "@/components/site/mobile-nav-drawer";
 import { ThemeSwitcher } from "@/components/site/theme-switcher";
-import type { AppNav } from "@/lib/ctf/types";
+import type { AppNav } from "@ctf-mn/api/types";
 
 export function AppHeader({ nav }: { nav: AppNav }) {
   const coreLinks = nav.links.filter((entry) => ["/challenge/list", "/scoreboard", "/activity"].includes(entry.href));

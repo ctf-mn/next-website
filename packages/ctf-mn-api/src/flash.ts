@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import type { FlashMessage } from "@/lib/ctf/types";
+import type { FlashMessage } from "@ctf-mn/api/types";
 
 const FLASH_KEY = "ctfmn_flash";
 

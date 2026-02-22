@@ -1,7 +1,7 @@
 import { ChallengeListFilters } from "@/components/challenge/challenge-list-filters";
 import { PageShell } from "@/components/site/page-shell";
-import { toUrlSearchParams, type NextSearchParams } from "@/lib/ctf/search";
-import { getChallengeList } from "@/lib/ctf/service";
+import { toUrlSearchParams, type NextSearchParams } from "@ctf-mn/api/search";
+import { getChallengeList } from "@ctf-mn/api/service";
 
 export const revalidate = 120;
 

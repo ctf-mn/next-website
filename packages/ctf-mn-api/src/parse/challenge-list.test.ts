@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseChallengeListPage } from "@/lib/ctf/parse/challenge-list";
+import { parseChallengeListPage } from "@ctf-mn/api/parse/challenge-list";
 
 describe("parseChallengeListPage", () => {
   it("marks solved challenges from upstream solved row styles", () => {

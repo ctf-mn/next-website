@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import type { AuthPage } from "@/lib/ctf/types";
+import type { AuthPage } from "@ctf-mn/api/types";
 
 const COOKIE_PREFIX = "ctfmn_auth_state_";
 

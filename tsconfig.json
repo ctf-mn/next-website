@@ -19,7 +19,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@ctf-mn/api": ["./packages/ctf-mn-api/src/index.ts"],
+      "@ctf-mn/api/*": ["./packages/ctf-mn-api/src/*"]
     }
   },
   "include": [

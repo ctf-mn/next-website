@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 
-import { ctfGetDocument, ctfPostDocument } from "@/lib/ctf/client";
-import { setFlash } from "@/lib/ctf/flash";
-import { parseChallengeDetailPage, parseFlashFromChallengeHtml } from "@/lib/ctf/parse/challenge-detail";
+import { ctfGetDocument, ctfPostDocument } from "@ctf-mn/api/client";
+import { setFlash } from "@ctf-mn/api/flash";
+import { parseChallengeDetailPage, parseFlashFromChallengeHtml } from "@ctf-mn/api/parse/challenge-detail";
 
 export async function POST(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   const { id } = await context.params;

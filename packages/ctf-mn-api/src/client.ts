@@ -1,9 +1,9 @@
 import { headers } from "next/headers";
 import type { CheerioAPI } from "cheerio";
 
-import { CTF_BASE_URL } from "@/lib/ctf/constants";
-import { parseHtmlFromStream } from "@/lib/ctf/parse/stream";
-import { getCookieHeader, mergeSetCookieHeaders } from "@/lib/ctf/session";
+import { CTF_BASE_URL } from "@ctf-mn/api/constants";
+import { parseHtmlFromStream } from "@ctf-mn/api/parse/stream";
+import { getCookieHeader, mergeSetCookieHeaders } from "@ctf-mn/api/session";
 
 export type CtfResponse = {
   status: number;

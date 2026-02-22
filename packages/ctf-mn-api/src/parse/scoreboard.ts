@@ -1,5 +1,5 @@
-import type { ScoreboardPage } from "@/lib/ctf/types";
-import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
+import type { ScoreboardPage } from "@ctf-mn/api/types";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@ctf-mn/api/parse/common";
 
 export function parseScoreboardPage(source: HtmlSource): ScoreboardPage {
   const $ = parseDocument(source);

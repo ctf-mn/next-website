@@ -1,5 +1,5 @@
-import type { AuthPage } from "@/lib/ctf/types";
-import { cleanText, parseDocument, parseTitle, type HtmlSource } from "@/lib/ctf/parse/common";
+import type { AuthPage } from "@ctf-mn/api/types";
+import { cleanText, parseDocument, parseTitle, type HtmlSource } from "@ctf-mn/api/parse/common";
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
 export function parseAuthPage(source: HtmlSource): AuthPage {

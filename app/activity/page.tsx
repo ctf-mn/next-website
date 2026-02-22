@@ -5,7 +5,7 @@ import { PageShell } from "@/components/site/page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { getActivity } from "@/lib/ctf/service";
+import { getActivity } from "@ctf-mn/api/service";
 import ActivityLoading from "./loading";
 
 export const revalidate = 15;

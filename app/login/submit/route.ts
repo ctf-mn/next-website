@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 
-import { setAuthState } from "@/lib/ctf/auth-state";
-import { ctfGetDocument, ctfPostDocument } from "@/lib/ctf/client";
-import { parseAuthPage } from "@/lib/ctf/parse/auth";
+import { setAuthState } from "@ctf-mn/api/auth-state";
+import { ctfGetDocument, ctfPostDocument } from "@ctf-mn/api/client";
+import { parseAuthPage } from "@ctf-mn/api/parse/auth";
 
 export async function POST(request: NextRequest) {
   const [formData, loginGet] = await Promise.all([

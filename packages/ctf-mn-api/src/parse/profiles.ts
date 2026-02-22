@@ -1,5 +1,5 @@
-import type { AuthorProfilePage, UserProfilePage } from "@/lib/ctf/types";
-import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
+import type { AuthorProfilePage, UserProfilePage } from "@ctf-mn/api/types";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@ctf-mn/api/parse/common";
 
 export function parseUserProfilePage(source: HtmlSource): UserProfilePage {
   const $ = parseDocument(source);

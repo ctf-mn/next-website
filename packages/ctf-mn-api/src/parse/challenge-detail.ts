@@ -1,5 +1,5 @@
-import type { ChallengeDetailPage, FlashMessage } from "@/lib/ctf/types";
-import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@/lib/ctf/parse/common";
+import type { ChallengeDetailPage, FlashMessage } from "@ctf-mn/api/types";
+import { cleanText, parseDocument, parseNav, parseTitle, relativePath, toNumber, type HtmlSource } from "@ctf-mn/api/parse/common";
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
 export function parseChallengeDetailPage(source: HtmlSource, id: number): ChallengeDetailPage {

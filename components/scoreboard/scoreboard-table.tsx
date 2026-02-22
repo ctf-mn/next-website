@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { withEllipsis } from "@/lib/ctf/pagination";
-import type { ScoreboardApiResponse } from "@/lib/ctf/types";
+import { withEllipsis } from "@ctf-mn/api/pagination";
+import type { ScoreboardApiResponse } from "@ctf-mn/api/types";
 import { cn } from "@/lib/utils";
 
 type Props = {

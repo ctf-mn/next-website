@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { readAuthState } from "@/lib/ctf/auth-state";
-import { getLoginPage } from "@/lib/ctf/service";
+import { readAuthState } from "@ctf-mn/api/auth-state";
+import { getLoginPage } from "@ctf-mn/api/service";
 
 export const dynamic = "force-dynamic";
 

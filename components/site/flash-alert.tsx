@@ -1,5 +1,5 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import type { FlashMessage } from "@/lib/ctf/types";
+import type { FlashMessage } from "@ctf-mn/api/types";
 
 export function FlashAlert({ flash }: { flash: FlashMessage | null }) {
   if (!flash) {

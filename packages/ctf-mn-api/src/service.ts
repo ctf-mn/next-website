@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 
-import { ctfGetDocument } from "@/lib/ctf/client";
-import { parseActivityPage } from "@/lib/ctf/parse/activity";
-import { parseAuthPage } from "@/lib/ctf/parse/auth";
-import { parseChallengeDetailPage } from "@/lib/ctf/parse/challenge-detail";
-import { parseChallengeListPage } from "@/lib/ctf/parse/challenge-list";
-import { parseAuthorProfilePage, parseUserProfilePage } from "@/lib/ctf/parse/profiles";
-import { parseScoreboardPage } from "@/lib/ctf/parse/scoreboard";
+import { ctfGetDocument } from "@ctf-mn/api/client";
+import { parseActivityPage } from "@ctf-mn/api/parse/activity";
+import { parseAuthPage } from "@ctf-mn/api/parse/auth";
+import { parseChallengeDetailPage } from "@ctf-mn/api/parse/challenge-detail";
+import { parseChallengeListPage } from "@ctf-mn/api/parse/challenge-list";
+import { parseAuthorProfilePage, parseUserProfilePage } from "@ctf-mn/api/parse/profiles";
+import { parseScoreboardPage } from "@ctf-mn/api/parse/scoreboard";
 import { toEnglish } from "@/lib/i18n/en-normalize";
 
 function ensureOkOrThrow(status: number) {

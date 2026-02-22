@@ -4,7 +4,7 @@ import { PageShell } from "@/components/site/page-shell";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { getAuthorProfile } from "@/lib/ctf/service";
+import { getAuthorProfile } from "@ctf-mn/api/service";
 
 export const revalidate = 60;
 

@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { NativeSelect } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import type { ChallengeListApiResponse, ChallengeListFilters } from "@/lib/ctf/types";
+import type { ChallengeListApiResponse, ChallengeListFilters } from "@ctf-mn/api/types";
 
 type Props = {
   initialData: ChallengeListApiResponse;

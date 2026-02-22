@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import type { ChallengeListApiResponse } from "@/lib/ctf/types";
-import { getChallengeList } from "@/lib/ctf/service";
+import type { ChallengeListApiResponse } from "@ctf-mn/api/types";
+import { getChallengeList } from "@ctf-mn/api/service";
 
 export async function GET(request: NextRequest) {
   const data = await getChallengeList(request.nextUrl.searchParams);

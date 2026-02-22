@@ -3,8 +3,8 @@ import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 import ScoreboardPage from "./page";
-import { getScoreboard } from "@/lib/ctf/service";
-import type { ScoreboardPage as ScoreboardData } from "@/lib/ctf/types";
+import { getScoreboard } from "@ctf-mn/api/service";
+import type { ScoreboardPage as ScoreboardData } from "@ctf-mn/api/types";
 
 vi.mock("next/link", () => ({
   default: ({ href, children, ...props }: { href: string; children: ReactNode }) => (
@@ -18,7 +18,7 @@ vi.mock("@/components/site/page-shell", () => ({
   PageShell: ({ children }: { children: ReactNode }) => <div>{children}</div>,
 }));
 
-vi.mock("@/lib/ctf/service", () => ({
+vi.mock("@ctf-mn/api/service", () => ({
   getScoreboard: vi.fn(),
 }));
 

@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { parseChallengeContent } from "@/lib/ctf/attachments";
-import { readFlash } from "@/lib/ctf/flash";
-import { getChallenge } from "@/lib/ctf/service";
+import { parseChallengeContent } from "@ctf-mn/api/attachments";
+import { readFlash } from "@ctf-mn/api/flash";
+import { getChallenge } from "@ctf-mn/api/service";
 
 export const revalidate = 60;
 

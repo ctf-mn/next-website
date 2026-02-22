@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseChallengeContent } from "@/lib/ctf/attachments";
+import { parseChallengeContent } from "@ctf-mn/api/attachments";
 
 describe("parseChallengeContent", () => {
   it("replaces heading-style files section with attachment cards source links", () => {

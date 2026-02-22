@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseAuthorProfilePage } from "@/lib/ctf/parse/profiles";
+import { parseAuthorProfilePage } from "@ctf-mn/api/parse/profiles";
 
 describe("parseAuthorProfilePage", () => {
   it("parses author challenge rows when a leading rank column exists", () => {

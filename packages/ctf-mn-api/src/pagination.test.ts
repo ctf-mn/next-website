@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { withEllipsis } from "@/lib/ctf/pagination";
+import { withEllipsis } from "@ctf-mn/api/pagination";
 
 describe("withEllipsis", () => {
   it("returns pages unchanged when there are no gaps", () => {
