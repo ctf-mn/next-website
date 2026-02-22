@@ -1,0 +1,195 @@
+<!doctype html>
+<html class="bg-gray-100">
+<head>
+  <meta charset="utf-8">
+  <title>Author: enhbold</title>
+  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <style>
+    .prose p {
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-white border-b py-3 h-16">
+    <div class="max-w-5xl mx-auto w-full h-full flex items-center justify-between  px-4">
+      <a class="text-xl font-semibold" href="/">CTF.mn</a>
+      <div class="flex gap-5">
+        
+        <a class="x-link" href="/challenge/list">Challenges</a>
+        <a class="x-link" href="/scoreboard">Scoreboard</a>
+        <a class="x-link" href="/activity">Activity</a>
+        &middot;
+          <a class="x-link" href="/login">Login</a>
+          <a class="x-link" href="/register">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-5xl w-full mx-auto mb-4 px-4">
+  <div class="flex justify-between items-center">
+    <h1 class="text-xl mt-4">Author: <strong>enhbold</strong></h1>
+  </div>
+
+  <div class="border shadow rounded mt-4">
+    <table class="bg-white w-full rounded">
+      <thead>
+        <tr class="h-12 text-left bg-slate-50">
+          <th class="rounded-tl pl-3" style="width:50px"></th>
+          <th class="text-left" style="">Challenge</th>
+          <th class="text-left" style="width:170px">Category</th>
+          <th class="text-left" style="width:200px">Event</th>
+          <th class="text-right" style="width:120px">Solved count</th>
+          <th class="text-right rounded-tr text-center pr-3" style="width:80px">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="h-12 border-t">
+            <td class="pl-3 pr-3 text-right text-gray-500">
+              1.
+            </td>
+            <td>
+              <a href="/challenge/475" class="x-link">
+                Hidden Warrior APK
+              </a>
+            </td>
+            <td class="text-left">
+              <a href="/challenge/list?category=reverse" class="x-link">
+                Reverse Engineering
+              </a>
+            </td>
+            <td>
+              <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+            </td>
+            <td class="text-right">
+              1
+            </td>
+            <td class="text-right pr-3">
+              1000
+            </td>
+          </tr>
+          <tr class="h-12 border-t">
+            <td class="pl-3 pr-3 text-right text-gray-500">
+              2.
+            </td>
+            <td>
+              <a href="/challenge/474" class="x-link">
+                UAF
+              </a>
+            </td>
+            <td class="text-left">
+              <a href="/challenge/list?category=pwn" class="x-link">
+                Pwn
+              </a>
+            </td>
+            <td>
+              <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+            </td>
+            <td class="text-right">
+              1
+            </td>
+            <td class="text-right pr-3">
+              1000
+            </td>
+          </tr>
+          <tr class="h-12 border-t">
+            <td class="pl-3 pr-3 text-right text-gray-500">
+              3.
+            </td>
+            <td>
+              <a href="/challenge/473" class="x-link">
+                ez ROP
+              </a>
+            </td>
+            <td class="text-left">
+              <a href="/challenge/list?category=pwn" class="x-link">
+                Pwn
+              </a>
+            </td>
+            <td>
+              <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+            </td>
+            <td class="text-right">
+              0
+            </td>
+            <td class="text-right pr-3">
+              1000
+            </td>
+          </tr>
+          <tr class="h-12 border-t">
+            <td class="pl-3 pr-3 text-right text-gray-500">
+              4.
+            </td>
+            <td>
+              <a href="/challenge/450" class="x-link">
+                ROP 2025
+              </a>
+            </td>
+            <td class="text-left">
+              <a href="/challenge/list?category=pwn" class="x-link">
+                Pwn
+              </a>
+            </td>
+            <td>
+              <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+            </td>
+            <td class="text-right">
+              7
+            </td>
+            <td class="text-right pr-3">
+              979
+            </td>
+          </tr>
+          <tr class="h-12 border-t">
+            <td class="pl-3 pr-3 text-right text-gray-500 rounded-bl">
+              5.
+            </td>
+            <td>
+              <a href="/challenge/449" class="x-link">
+                Stack swing
+              </a>
+            </td>
+            <td class="text-left">
+              <a href="/challenge/list?category=pwn" class="x-link">
+                Pwn
+              </a>
+            </td>
+            <td>
+              <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+            </td>
+            <td class="text-right">
+              5
+            </td>
+            <td class="text-right pr-3 rounded-br">
+              990
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <script src="/static/js/jquery-v3.7.0.min.js"></script>
+  <script src="/static/js/marked-v12.0.2.min.js"></script>
+  <script>
+    $(function() {
+      if ($('[data-markdown-content]').length && $('[data-markdown-content]').prop('data-markdown-content') !== false) {
+        let content = $('[data-markdown-content]').html()
+        while (content.includes('\n  ')) {
+          content = content.replace('\n  ', '\n')
+        }
+        $('[data-markdown-content]').html(marked.parse(content))
+        $('[data-markdown-content]').prop('data-markdown-content', true)
+      }
+      $('form').on('submit', (e) => {
+        if ($(e.currentTarget).data('submitting') === true) {
+          e.preventDefault()
+          return
+        }
+        $(e.currentTarget).data('submitting', true)
+      })
+    })
+  </script>
+</body>
+</html>
+

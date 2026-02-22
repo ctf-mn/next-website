@@ -2,8 +2,16 @@
   "name": "@ctf-mn/api",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "bench": "tsx --tsconfig ../../tsconfig.json ./benchmarks/parse-pages.bench.ts",
+    "bench:fetch": "tsx --tsconfig ../../tsconfig.json ./benchmarks/fetch-fixtures.ts"
+  },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "devDependencies": {
+    "tinybench": "^2.9.0",
+    "tsx": "^4.21.0"
+  },
   "exports": {
     ".": {
       "default": "./src/index.ts",

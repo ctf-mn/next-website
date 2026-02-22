@@ -1,0 +1,121 @@
+<!doctype html>
+<html class="bg-gray-100">
+<head>
+  <meta charset="utf-8">
+  <title>ez ROP</title>
+  <link rel="stylesheet" href="/static/css/tailwind.css">
+  <style>
+    .prose p {
+      white-space: pre-line;
+    }
+  </style>
+</head>
+<body>
+  <header class="bg-white border-b py-3 h-16">
+    <div class="max-w-5xl mx-auto w-full h-full flex items-center justify-between  px-4">
+      <a class="text-xl font-semibold" href="/">CTF.mn</a>
+      <div class="flex gap-5">
+        
+        <a class="x-link" href="/challenge/list">Challenges</a>
+        <a class="x-link" href="/scoreboard">Scoreboard</a>
+        <a class="x-link" href="/activity">Activity</a>
+        &middot;
+          <a class="x-link" href="/login">Login</a>
+          <a class="x-link" href="/register">Register</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-5xl w-full mx-auto mb-4 px-4">
+  <div class="max-w-3xl w-full mx-auto  border shadow  bg-white mt-4 p-4 rounded">
+    <div class="text-xl font-medium border-b pb-2 mb-2">
+      ez ROP
+    </div>
+    <div class="text-slate-500 mb-4 flex justify-between">
+      <div>
+        <a href="/challenge/list?category=pwn&event=all" class="x-link">Pwn</a>
+        &middot;
+        <a href="/challenge/list?category=all&event=haruulzangi-2025" class="x-link">Харуул Занги: 2025</a>
+        &middot;
+        <a href="/author/enhbold" class="x-link">
+          enhbold
+        </a>
+      </div>
+      <div>
+        Solved: 0
+        &middot;
+        Score: 1000
+      </div>
+    </div>
+
+    <div data-page-content class="prose max-w-none">
+      MORE ROP
+
+
+```
+nc 139.59.230.119 10473
+```
+**Files:**
+- [pwn4](https://d17zlucxou2y8w.cloudfront.net/pwn/473--ez_rop/pwn4)
+    </div>
+
+      <div class="border-t pt-4 mt-4">
+        <div class="mb-4 bg-yellow-100 border border-yellow-200 text-sm text-yellow-800 rounded-lg p-4" role="alert">
+          <span class="font-bold">Login required</span> to submit flag.
+        </div>
+      </div>
+      <div class="flex gap-4 items-center">
+        <div class="grow">
+          <input type="text" name="flag" class="border text-sm rounded-lg block w-full py-2 px-3 bg-gray-200 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500" name="" value="" placeholder="Flag" disabled>
+        </div>
+        <button type="submit" name="action" value="flag" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+          Submit flag
+        </button>
+      </div>
+  </div>
+  <div class="max-w-3xl w-full mx-auto  border shadow  bg-white mt-4 rounded">
+    <table class="bg-white w-full rounded">
+      <thead>
+        <tr class="h-12 text-left bg-slate-50">
+          <th class="rounded-tl pl-3" style="width:150px">Solved at</th>
+          <th class="rounded-tr text-left" style="width:200px">User</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="border-t">
+            <td class="text-center h-12 text-gray-400 text-sm" colspan="2">
+              No one solved yet.
+            </td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <script src="/static/js/jquery-v3.7.0.min.js"></script>
+  <script src="/static/js/marked-v12.0.2.min.js"></script>
+  <script>
+    $(function() {
+      if ($('[data-markdown-content]').length && $('[data-markdown-content]').prop('data-markdown-content') !== false) {
+        let content = $('[data-markdown-content]').html()
+        while (content.includes('\n  ')) {
+          content = content.replace('\n  ', '\n')
+        }
+        $('[data-markdown-content]').html(marked.parse(content))
+        $('[data-markdown-content]').prop('data-markdown-content', true)
+      }
+      $('form').on('submit', (e) => {
+        if ($(e.currentTarget).data('submitting') === true) {
+          e.preventDefault()
+          return
+        }
+        $(e.currentTarget).data('submitting', true)
+      })
+    })
+  </script>
+  <script>
+    $('[data-page-content]').html(marked.parse("MORE ROP\n\n\n```\nnc 139.59.230.119 10473\n```\n**Files:**\n- [pwn4](https://d17zlucxou2y8w.cloudfront.net/pwn/473--ez_rop/pwn4)"))
+  </script>
+</body>
+</html>
+
