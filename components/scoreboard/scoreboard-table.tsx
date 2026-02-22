@@ -114,12 +114,23 @@ function ScoreboardTableContent({ initialData, initialPage }: Props) {
         {query.isFetching ? <p className="text-sm text-muted-foreground">Updating results...</p> : null}
 
         <div className="flex flex-wrap items-center gap-2">
-          {pagination.map((item) =>
-            item.type === "page" ? (
+          {pagination.map((item) => {
+            if (item.type !== "page") {
+              return (
+                <span key={item.key} className="px-1 text-muted-foreground" aria-hidden>
+                  ...
+                </span>
+              );
+            }
+
+            const isActive = item.value.current || item.value.page === page;
+
+            return (
               <Link
                 key={item.value.page}
                 href={item.value.href}
-                aria-current={item.value.current || item.value.page === page ? "page" : undefined}
+                aria-current={isActive ? "page" : undefined}
+                aria-label={isActive ? `Current page ${item.value.page}` : `Go to page ${item.value.page}`}
                 onClick={(event) => {
                   event.preventDefault();
                   setPage(item.value.page);
@@ -128,7 +139,7 @@ function ScoreboardTableContent({ initialData, initialPage }: Props) {
                 <Badge
                   className={cn(
                     "h-10 w-10 justify-center rounded-lg border p-0 text-sm transition-colors",
-                    item.value.current || item.value.page === page
+                    isActive
                       ? "border-foreground/40 bg-muted text-foreground ring-1 ring-foreground/15 ring-offset-1 ring-offset-background font-semibold"
                       : "border-border bg-background text-muted-foreground hover:border-foreground/40 hover:text-foreground",
                   )}
@@ -137,12 +148,8 @@ function ScoreboardTableContent({ initialData, initialPage }: Props) {
                   {item.value.page}
                 </Badge>
               </Link>
-            ) : (
-              <span key={item.key} className="px-1 text-muted-foreground" aria-hidden>
-                ...
-              </span>
-            ),
-          )}
+            );
+          })}
         </div>
       </CardContent>
     </Card>

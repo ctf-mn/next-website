@@ -8,10 +8,7 @@ test.describe("Scoreboard pagination", () => {
     const activeLink = page.locator('a[aria-current="page"]');
     await expect(activeLink).toHaveCount(1);
     await expect(activeLink).toHaveAttribute("href", /\/scoreboard\?page=\d+/);
-
-    const activeBadge = activeLink.locator("div").first();
-    await expect(activeBadge).toHaveClass(/ring-2/);
-    await expect(activeBadge).toHaveClass(/font-bold/);
+    await expect(activeLink).toHaveAttribute("aria-label", /Current page 2/i);
   });
 
   test("renders ellipsis when pagination has numeric gaps", async ({ page }) => {
