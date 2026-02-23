@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { Check, Laptop, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -47,8 +48,23 @@ export function ThemeSwitcher() {
     setOpen((value) => !value);
   }, []);
 
+  const handlePointerEnter = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    setOpen(true);
+  }, []);
+
+  const handlePointerLeave = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse") return;
+    setOpen(false);
+  }, []);
+
   return (
-    <div ref={rootRef} className="relative">
+    <div
+      ref={rootRef}
+      className="relative"
+      onPointerEnter={handlePointerEnter}
+      onPointerLeave={handlePointerLeave}
+    >
       <Button
         type="button"
         variant="outline"
